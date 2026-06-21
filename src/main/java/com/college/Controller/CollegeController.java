@@ -26,7 +26,7 @@ public class CollegeController {
 
 	@GetMapping("/")
 	public String home(Model model) {
-		model.addAttribute("newsTicker", "Admissions Open for B.Sc, GNM, and M.Sc Nursing | Apply Now!");
+		model.addAttribute("newsTicker", "Admissions Open for B.Sc, GNM, and M.Sc Pharmacy | Apply Now!");
 		return "index";
 	}
 	@GetMapping("/about")

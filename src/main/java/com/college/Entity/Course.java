@@ -11,7 +11,7 @@ public class Course {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    private String courseName;     // e.g., B.Sc Nursing
+	    private String courseName;     // e.g., B.Sc Pharmacy
 	    private String duration;       // e.g., 4 Years
 	    private String eligibility;    // e.g., 10+2 Science with Biology
 	    private String description;    // detailed info about the course
