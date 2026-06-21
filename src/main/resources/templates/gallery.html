@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gallery - Nabarangpur Pharmacy College</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+ 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+ 	
+    <style>
+     body {
+	margin: 0;
+	padding: 0;
+
+}
+    /* Enable hover dropdown for navbar */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+    /* 🔸 Navbar Link Hover Highlight */
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: white;
+    color: #f57c00 !important;  /* keep branding color for text */
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+        .lab-img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .lab-list a {
+            cursor: pointer;
+        }
+        .gallery-img {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<!-- ✅ Top Header Section with Logo and Founder Info -->
+<div style="background: linear-gradient(to right, #1e3c72, #2a5298); color: white; padding: 10px 20px;"
+     class="d-flex justify-content-between align-items-center flex-wrap">
+
+    <!-- 🔗 Left: Go to Jyoti Home Page -->
+    <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
+    <a th:href="@{/}" class="text-white text-decoration-none fw-bold">
+    GO TO JYOTI HOME PAGE
+</a>
+</div>
+
+    <!-- Social Icons -->
+<div class="d-flex gap-3 mb-2 mb-md-0">
+    <a href="https://www.facebook.com/JyotiNursingCollegeOfficial" class="text-white" target="_blank" title="Facebook">
+        <i class="bi bi-facebook fs-5"></i>
+    </a>
+    <a href="https://twitter.com/JyotiNursingCollegeOfficial" class="text-white" target="_blank" title="Twitter">
+        <i class="bi bi-twitter fs-5"></i>
+    </a>
+    <a href="https://www.youtube.com/JyotiNursingCollegeOfficial" class="text-white" target="_blank" title="YouTube">
+        <i class="bi bi-youtube fs-5"></i>
+    </a>
+    <a href="https://www.instagram.com/JyotiNursingCollegeOfficial" class="text-white" target="_blank" title="Instagram">
+        <i class="bi bi-instagram fs-5"></i>
+    </a>
+</div>
+
+    <!-- 👤 Right: Founder Info -->
+    <div class="d-flex align-items-center">
+        <img src="/images/jyotikumar.jpg" alt="Founder"
+             style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" class="me-2">
+        <div>
+            <strong>Prof.Jyotikumar</strong><br>
+            <small>Founder – JNC</small><br>
+            <a href="https://jyotikumar.com" class="text-white text-decoration-none" target="_blank">jyotikumar.com</a>
+        </div>
+    </div>
+</div>
+<!-- 🔶 2. College Logo + Name -->
+    <div class="bg-white py-2 px-3 d-flex justify-content-between align-items-center border-bottom">
+        <div class="d-flex align-items-center gap-3">
+            <img src="/images/logo.jpg" alt="College Logo" style="height: 60px;">
+            <div>
+                <h5 class="mb-0 text-dark fw-bold">Nabarangpur Pharmacy College</h5>
+                <small class="text-muted">Affiliated to XYZ University | Est. 2020</small>
+            </div>
+        </div>
+    </div>
+<!-- 🔷 Common Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #f57c00; z-index: 1030;">
+<div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+    <ul class="navbar-nav w-100 d-flex justify-content-between text-center">
+    <li class="nav-item flex-fill">
+        <a class="nav-link active fw-bold text-white" th:href="@{/}">HOME</a>
+    </li>
+    <li class="nav-item flex-fill">
+        <a class="nav-link text-white" th:href="@{/about}">ABOUT</a>
+    </li>
+    <li class="nav-item flex-fill">
+        <a class="nav-link text-white" th:href="@{/courses}">ACADEMICS</a>
+    </li>
+    <li class="nav-item dropdown flex-fill">
+        <a class="nav-link text-white dropdown-toggle" href="#" id="admissionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            ADMISSIONS
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="admissionDropdown">
+            <li>
+                <a class="dropdown-item text-danger fw-bold" th:href="@{/admission}">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> APPLY
+                </a>
+            </li>
+        </ul>
+    </li>
+     <li class="nav-item flex-fill">
+        <a class="nav-link text-white" th:href="@{/gallery}">LABORATORY</a>
+    </li>
+    <li class="nav-item flex-fill">
+        <a class="nav-link text-white" th:href="@{/events}">EVENTS</a>
+    </li>
+    <li class="nav-item dropdown flex-fill position-relative">
+    <!-- 🔹 RESEARCH Link — clickable -->
+    <a class="nav-link fw-bold text-white" href="/research" id="researchDropdown">
+        RESEARCH
+    </a>
+
+    <!-- 🔹 Dropdown Toggler Icon (Caret only) -->
+    <a class="nav-link dropdown-toggle text-white position-absolute" 
+       style="right: 0; top: 0; height: 100%; width: 30px;" 
+       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    </a>
+
+    <!-- 🔻 Dropdown Menu -->
+    <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+        <li><a class="dropdown-item" href="/publications">Publications</a></li>
+        <li><a class="dropdown-item" href="/research-list">Research List</a></li>
+        <li><a class="dropdown-item" href="/thesis">Thesis</a></li>
+    </ul>
+</li>
+    
+    <li class="nav-item dropdown flex-fill hover-dropdown"><a
+						class="nav-link dropdown-toggle fw-bold text-white" href="#"
+						id="peopleDropdown" role="button"> PEOPLE </a>
+						<ul class="dropdown-menu" aria-labelledby="peopleDropdown">
+							<li><a class="dropdown-item" th:href="@{/administration}">Administration</a></li>
+							<li><a class="dropdown-item" th:href="@{/faculty}">Faculty</a></li>
+							<li><a class="dropdown-item" th:href="@{/board-of-studies}">Board
+									Of Studies</a></li>
+						</ul></li>
+    <li class="nav-item">
+    <a class="nav-link text-white" th:href="@{/contact}">CONTACT US</a>
+</li>
+</ul>    
+</div>
+ </div>
+</nav>
+<!-- 🧪 Gallery Banner Section -->
+<section style="position: relative;">
+    <div class="position-relative text-white">
+        <img src="/images/lab-banner.jpg" alt="Gallery Banner" class="img-fluid w-100"
+             style="height: 500px; object-fit: cover; opacity: 0.85;">
+             
+        <!-- Overlay -->
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        "></div>
+
+        <!-- Text on Image -->
+        <div class="position-absolute top-50 start-50 translate-middle text-center">
+            <h1 class="display-4 fw-bold">Campus Gallery</h1>
+            <p class="fs-5">Home / Gallery</p>
+        </div>
+    </div>
+</section>
+
+<!-- 🔬 Lab Section (dynamically switchable) -->
+<section class="container py-5">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="list-group lab-list shadow">
+        <a class="list-group-item list-group-item-action active" onclick="showLab('maternal')">👩‍🍼 MATERNAL & CHILD HEALTH LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('paediatric')">🧒 PAEDIATRIC LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('nutrition')">🥗 NUTRITION LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('community')">🏥 COMMUNITY HEALTH NURSING LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('foundation')">🏫 NURSING FOUNDATION LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('surgical')">🩺 MEDICAL-SURGICAL NURSING LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('computer')">💻 COMPUTER LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('bioscience')">🔬 BIO-SCIENCE LAB</a>
+        <a class="list-group-item list-group-item-action" onclick="showLab('advanced')">🧬 ADVANCED NURSING SKILL LAB</a>
+      </div>
+    </div>
+
+    <div class="col-md-8" id="labContent">
+      <img src="/images/maternal-lab.jpg" alt="Maternal Lab" class="lab-img mb-3">
+      <h3>Maternal & Child Health Lab</h3>
+      <p>AIMS: To appreciate the concepts and principles of midwifery and obstetrical nursing.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const labs = {
+    maternal: {
+      title: "Maternal & Child Health Lab",
+      image: "/images/maternal-lab.jpg",
+      desc: "AIMS: To appreciate the concepts and principles of midwifery and obstetrical nursing."
+    },
+    paediatric: {
+      title: "Paediatric Lab",
+      image: "/images/paediatric-lab.jpg",
+      desc: "AIMS: To understand and practice child care techniques including growth monitoring and vaccination training."
+    },
+    nutrition: {
+      title: "Nutrition Lab",
+      image: "/images/nutrition-lab.jpg",
+      desc: "AIMS: To gain knowledge of balanced diets, nutrition assessment, and food preparation."
+    },
+    community: {
+      title: "Community Health Nursing Lab",
+      image: "/images/community-lab.jpg",
+      desc: "AIMS: To develop community health practices and understand outreach services."
+    },
+    foundation: {
+      title: "Nursing Foundation Lab",
+      image: "/images/foundation-lab.jpg",
+      desc: "AIMS: To master fundamental nursing procedures and patient care skills."
+    },
+    surgical: {
+      title: "Medical-Surgical Nursing Lab",
+      image: "/images/surgical-lab.jpg",
+      desc: "AIMS: To learn surgical equipment handling and post-operative nursing."
+    },
+    computer: {
+      title: "Computer Lab",
+      image: "/images/computer-lab.jpg",
+      desc: "AIMS: To develop IT skills including patient record systems and research support."
+    },
+    bioscience: {
+      title: "Bio-Science Lab",
+      image: "/images/bioscience-lab.jpg",
+      desc: "AIMS: To study anatomical models, microbiology, and physiology fundamentals."
+    },
+    advanced: {
+      title: "Advanced Nursing Skill Lab",
+      image: "/images/advanced-lab.jpg",
+      desc: "AIMS: To practice emergency nursing and complex clinical procedures."
+    }
+  };
+
+  function showLab(key) {
+    const lab = labs[key];
+    document.getElementById("labContent").innerHTML = `
+      <img src="${lab.image}" alt="${lab.title}" class="lab-img mb-3">
+      <h3>${lab.title}</h3>
+      <p>${lab.desc}</p>
+    `;
+    document.querySelectorAll('.lab-list a').forEach(item => item.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+
+<!-- Full Laboratory Gallery Section -->
+<div class="container mt-5">
+  <div class="text-center">
+    <h2 class="fw-bold" style="font-size: 2.8rem; display: inline-block; position: relative;">
+      Laboratory
+      <span style="display: block; width: 80px; height: 4px; background-color: red; margin: 8px auto 0; border-radius: 2px;"></span>
+    </h2>
+  </div>
+</div>
+   <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/maternal-lab.jpg" alt="Lab 1" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/paediatric-lab.jpg" alt="Lab 2" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/nutrition-lab.jpg" alt="Lab 3" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/community-lab.jpg" alt="Lab 4" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/foundation-lab.jpg" alt="Lab 5" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/surgical-lab.jpg" alt="Lab 6" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/computer-lab.jpg" alt="Lab 7" class="img-fluid gallery-img">
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <img src="/images/advanced-lab.jpg" alt="Lab 8" class="img-fluid gallery-img">
+        </div>
+    </div>
+
+
+<!-- ⚫ Full-width Black Horizontal Line -->
+<hr style="border: none; height: 3px; background-color: black; margin: 0;">
+<!-- 🔻 Footer Section -->
+<footer class="bg-light text-dark pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+            <!-- Column 1: Admissions -->
+            <div class="col-md-3 mb-4">
+                <h6 class="fw-bold">Admissions</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">MOU’s and Collaborations</a></li>
+                    <li><a href="#">Centres of Excellence</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Resources -->
+            <div class="col-md-3 mb-4">
+                <h6 class="fw-bold">Resources</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#">SAP Portal</a></li>
+                    <li><a href="#">Grievance Cell</a></li>
+                    <li><a href="#">JIIT Review</a></li>
+                    <li><a href="#">Student Activity Centre</a></li>
+                    <li><a href="#">Anti-Ragging</a></li>
+                    <li><a href="#">Download Logo</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Other Links -->
+            <div class="col-md-3 mb-4">
+                <h6 class="fw-bold">Other Links</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#">Founder</a></li>
+                    <li><a href="#">Jyoti Foundation</a></li>
+                    <li><a href="#">Art of Giving</a></li>
+                    <li><a href="#">JIMS Hospital</a></li>
+                    <li><a href="#">Technology Business Incubator</a></li>
+                    <li><a href="#">JYOTI-ITI</a></li>
+                    <li><a href="#">JYOTI Polytechnic</a></li>
+                    <li><a href="#">JYOTI International School</a></li>
+                    <li><a href="#">Kalarabanka Smart Village</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Address -->
+            <div class="col-md-3 mb-4">
+                <h6 class="fw-bold">ADDRESS FOR COMMUNICATION</h6>
+                <p class="mb-1">
+                    <i class="bi bi-geo-alt-fill"></i> Jyoti Institute of Nursing Sciences,<br>
+                    (JINS), JINS Deemed to be University<br>
+                    Campus-1, Archaya Vihar, Bhubaneswar 751022
+                </p>
+                <p class="mb-1"><i class="bi bi-telephone-fill"></i> 8908141428</p>
+                <p class="mb-1"><i class="bi bi-envelope-fill"></i> info@jyoti.ac.in</p>
+                <p><i class="bi bi-clock-fill"></i> Monday - Friday: 8:00 AM - 10:00 PM</p>
+            </div>
+        </div>
+
+        <!-- Footer bottom -->
+        <div class="text-center pt-3 border-top mt-3">
+            <p class="mb-0">&copy; Copyright 2025 - All Rights Reserved</p>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
