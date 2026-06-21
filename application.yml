@@ -1,0 +1,41 @@
+server:
+  port: 8383
+
+spring:
+  datasource:
+    url: jdbc:mysql://sql8.freesqldatabase.com:3306/sql8831032
+    username: sql8831032
+    password: iLW4CcPWe2
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+
+  mvc:
+    static-path-pattern: /**
+    view:
+      prefix: /WEB-INF/views/
+
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
