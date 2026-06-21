@@ -8,12 +8,20 @@ spring:
     password: iLW4CcPWe2
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+      idle-timeout: 10000
+      max-lifetime: 30000
+      connection-timeout: 20000
+
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
-      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
   mvc:
     static-path-pattern: /**
@@ -33,9 +41,4 @@ spring:
 logging:
   level:
     org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+      hibernate: ERROR
